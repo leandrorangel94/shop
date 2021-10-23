@@ -15,7 +15,7 @@ final dummyProducts = [
     description: 'Um belo par de calças.',
     price: 59.99,
     imageUrl:
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Trousers%2C_dress_%28AM_1960.022-8%29.jpg/512px-Trousers%2C_dress_%28AM_1960.022-8%29.jpg',
+        'https://a-static.mlcdn.com.br/618x463/calca-jogger-preta-masculina-cargo-streetwear-art-stillo/artstillo/7685526272/7768111b8994f3222fd1778282cdda68.jpg',
   ),
   Product(
     id: 'p3',
@@ -31,6 +31,6 @@ final dummyProducts = [
     description: 'Prepare qualquer comida que você quiser.',
     price: 49.99,
     imageUrl:
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Cast-Iron-Pan.jpg/1024px-Cast-Iron-Pan.jpg',
+        'https://a-static.mlcdn.com.br/1500x1500/panela-media-antiaderente-20cm-em-aluminio-preta-alufort/wpconnect/6133/526ae2155500f3f3905aa6b1f46a68f3.jpg',
   ),
 ];
