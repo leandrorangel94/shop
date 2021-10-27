@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shop/models/auth.dart';
 import 'package:shop/models/order_list.dart';
 import 'package:shop/models/products_list.dart';
+import 'package:shop/pages/auth_or_home_page.dart';
 import 'package:shop/pages/cart_page.dart';
 import 'package:shop/pages/orders_page.dart';
 import 'package:shop/pages/product_detail_page.dart';
 import 'package:shop/pages/product_form_page.dart';
 import 'package:shop/pages/products_page.dart';
-import 'package:shop/pages/products_overview_page.dart';
 import 'package:shop/utils/app_routes.dart';
 
 import 'models/cart.dart';
@@ -25,13 +26,23 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (_) => ProductsList(),
+          create: (_) => Auth(),
         ),
+        ChangeNotifierProxyProvider<Auth, ProductsList>(
+          create: (_) => ProductsList(),
+          update: (ctx, auth, previous) {
+            return ProductsList(
+                auth.token ?? '', auth.userId ?? '', previous?.items ?? []);
+          },
+        ),
+        ChangeNotifierProxyProvider<Auth, OrderList>(
+            create: (_) => OrderList(),
+            update: (ctx, auth, previous) {
+              return OrderList(
+                  auth.token ?? '', auth.userId ?? '', previous?.items ?? []);
+            }),
         ChangeNotifierProvider(
           create: (_) => Cart(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => OrderList(),
         ),
       ],
       child: MaterialApp(
@@ -45,7 +56,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         //home: const ProductsOverviewPage(),
         routes: {
-          AppRoutes.HOME: (ctx) => const ProductsOverviewPage(),
+          AppRoutes.AUTH_OR_HOME: (ctx) => const AuthOrHomePage(),
           AppRoutes.PRODUCT_DETAIL: (ctx) => const ProductDetailPage(),
           AppRoutes.CART: (ctx) => const CartPage(),
           AppRoutes.ORDERS: (ctx) => const OrdersPage(),
